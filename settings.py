@@ -12,6 +12,6 @@ RESTPLUS_ERROR_404_HELP = False
 # GAN client settings
 DEFAULT_TF_SERVER_NAME = '172.17.0.2'
 DEFAULT_TF_SERVER_PORT = 9000
-GAN_MODEL_NAME = 'gan'
-GAN_MODEL_SIGNATURE_NAME = 'predict_images'
-GAN_MODEL_INPUTS_KEY = 'images'
+MODEL_NAME = 'keras_model'
+MODEL_SIGNATURE_NAME = 'predict_images'
+MODEL_INPUTS_KEY = 'images'

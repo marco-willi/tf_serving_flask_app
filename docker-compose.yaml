@@ -4,8 +4,10 @@ services:
 
   tf-serving-server:
     container_name: tf-serving-server
-    image: $USER/tensorflow-serving-gan:v1.0
-    command: /serving/bazel-bin/tensorflow_serving/model_servers/tensorflow_model_server --port=9000 --model_name=gan --model_base_path=/serving/gan-export &> gan_log &
+    image: $USER/tensorflow-serving-devel-cpu
+    volumes:
+      - ~/:/host
+    command: bazel-bin/tensorflow_serving/model_servers/tensorflow_model_server --port=9000 --model_name=keras_model --model_base_path=/host/data_hdd/ctc/ss/example/deploy_estimator &> estimator_log &
     networks:
       - tf_serving
     ports:

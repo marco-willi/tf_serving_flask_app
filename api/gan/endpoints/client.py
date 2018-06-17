@@ -8,8 +8,8 @@ from api.gan.logic.tf_serving_client import make_prediction
 from werkzeug.datastructures import FileStorage
 
 
-# create dedicated namespace for GAN client
-ns = api.namespace('gan_client', description='Operations for GAN client')
+# create dedicated namespace for model client
+ns = api.namespace('model_client', description='Operations for Model client')
 
 # Flask-RestPlus specific parser for image uploading
 UPLOAD_KEY = 'image'
@@ -23,8 +23,8 @@ upload_parser.add_argument(UPLOAD_KEY,
 
 @ns.route('/prediction')
 class GanPrediction(Resource):
-    @ns.doc(description='Predict the house number on the image using GAN model. ' +
-            'Return 3 most probable digits with their probabilities',
+    @ns.doc(description='Predict camera trap images. ' +
+            'Return 3 most probable classes with their probabilities',
             responses={
                 200: "Success",
                 400: "Bad request",
