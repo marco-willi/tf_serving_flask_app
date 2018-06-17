@@ -16,6 +16,11 @@ services:
   tf-serving-client:
     container_name: tf-serving-client
     image: $USER/tensorflow-serving-client:latest
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ~/:/host
     networks:
       - tf_serving
     ports:
