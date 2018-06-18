@@ -37,44 +37,6 @@ def __create_prediction_request__(image):
     request = predict_pb2.PredictRequest()
     log.info("Image is: %s" % image[0:50])
 
-
-    try:
-        tp = tf.contrib.util.make_tensor_proto([image], dtype=tf.string, shape=[1])
-        log.info("Tensor proto is: %s" % tp[0:50])
-    except:
-        pass
-
-    try:
-        tp = tf.contrib.util.make_tensor_proto([image], dtype=tf.string, shape=[0])
-        log.info("Tensor proto2 is: %s" % tp[0:50])
-    except:
-        pass
-
-    try:
-        tp = tf.contrib.util.make_tensor_proto(image, dtype=tf.string, shape=[0])
-        log.info("Tensor proto3 is: %s" % tp[0:50])
-    except:
-        pass
-
-    try:
-        tp = tf.contrib.util.make_tensor_proto(image, dtype=tf.string, shape=[1])
-        log.info("Tensor proto4 is: %s" % tp[0:50])
-    except:
-        pass
-
-
-    try:
-        tp = tf.contrib.util.make_tensor_proto(image, dtype=tf.string)
-        log.info("Tensor proto5 is: %s" % tp[0:50])
-    except:
-        pass
-
-    try:
-        tp = tf.contrib.util.make_tensor_proto([image], dtype=tf.string)
-        log.info("Tensor proto6 is: %s" % tp[0:50])
-    except:
-        pass
-
     # Call model to make prediction on the image
     request.model_spec.name = settings.MODEL_NAME
     request.model_spec.signature_name = settings.MODEL_SIGNATURE_NAME
@@ -107,6 +69,8 @@ def __make_prediction_and_prepare_results__(stub, request):
     :return: List of tuples, 3 most probable digits with their probabilities
     '''
     result = stub.Predict(request, 60.0)  # 60 secs timeout
+    log.info("Result outputs are: %s" result.outputs)
+    log.info("Result are: %s" result)
     probs = result.outputs['scores'].float_val
     value_dict = {idx: prob for idx, prob in enumerate(probs)}
     sorted_values = sorted(

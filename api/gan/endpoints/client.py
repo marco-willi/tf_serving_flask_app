@@ -48,6 +48,7 @@ class GanPrediction(Resource):
 
         try:
             results = make_prediction(image)
+            print("results is: %s" % results)
             results_json = [{'digit': res[0], 'probability': res[1]} for res in results]
             return {'prediction_result': results_json}, 200
 
