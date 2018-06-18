@@ -35,12 +35,51 @@ def __create_prediction_request__(image):
     '''
     # create predict request
     request = predict_pb2.PredictRequest()
+    log.info("Image is: %s" % image)
+
+
+    try:
+        tp = tf.contrib.util.make_tensor_proto([image], dtype=tf.string, shape=[1])
+        log.info("Tensor proto is: %s" % tp)
+    except:
+        pass
+
+    try:
+        tp = tf.contrib.util.make_tensor_proto([image], dtype=tf.string, shape=[0])
+        log.info("Tensor proto2 is: %s" % tp)
+    except:
+        pass
+
+    try:
+        tp = tf.contrib.util.make_tensor_proto(image, dtype=tf.string, shape=[0])
+        log.info("Tensor proto3 is: %s" % tp)
+    except:
+        pass
+
+    try:
+        tp = tf.contrib.util.make_tensor_proto(image, dtype=tf.string, shape=[1])
+        log.info("Tensor proto4 is: %s" % tp)
+    except:
+        pass
+
+
+    try:
+        tp = tf.contrib.util.make_tensor_proto(image, dtype=tf.string)
+        log.info("Tensor proto5 is: %s" % tp)
+    except:
+        pass
+
+    try:
+        tp = tf.contrib.util.make_tensor_proto([image], dtype=tf.string)
+        log.info("Tensor proto6 is: %s" % tp)
+    except:
+        pass
 
     # Call model to make prediction on the image
     request.model_spec.name = settings.MODEL_NAME
     request.model_spec.signature_name = settings.MODEL_SIGNATURE_NAME
     request.inputs[settings.MODEL_INPUTS_KEY].CopyFrom(
-        tf.contrib.util.make_tensor_proto(image))
+        tf.contrib.util.make_tensor_proto([image], dtype=tf.string, shape=[1]))
 
     return request
 
