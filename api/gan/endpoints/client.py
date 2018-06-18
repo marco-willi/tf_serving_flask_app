@@ -1,5 +1,6 @@
 import io
 import json
+import urllib.request as req
 
 from flask import request
 from flask_restplus import Resource
@@ -33,8 +34,12 @@ class GanPrediction(Resource):
     @ns.expect(upload_parser)
     def post(self):
         try:
-            image_file = request.files[UPLOAD_KEY]
-            image = io.BytesIO(image_file.read())
+            req_data = request.get_json()
+            print("got req_data: %s" req_data)
+            image_url = req_data['url']
+            print("got url: %s" image_url)
+            with req.urlopen(image_url) as url:
+                image = io.BytesIO(url.read())
         except Exception as inst:
             return {'message': 'something wrong with incoming request. ' +
                                'Original message: {}'.format(inst)}, 400
