@@ -1,6 +1,5 @@
 from __future__ import print_function
 
-import os
 import operator
 import logging
 import settings
@@ -15,6 +14,7 @@ from tensorflow_serving.apis import prediction_service_pb2
 
 log = logging.getLogger(__name__)
 
+
 def __get_tf_server_connection_params__():
     '''
     Returns connection parameters to TensorFlow Server
@@ -26,6 +26,7 @@ def __get_tf_server_connection_params__():
 
     return server_name, server_port
 
+
 def __create_prediction_request__(image):
     '''
     Creates prediction request to TensorFlow server for GAN model
@@ -35,7 +36,7 @@ def __create_prediction_request__(image):
     '''
     # create predict request
     request = predict_pb2.PredictRequest()
-    log.info("Image is: %s" % image[0:50])
+    #log.debug("Image is: %s" % image[0:50])
 
     # Call model to make prediction on the image
     request.model_spec.name = settings.MODEL_NAME
@@ -44,6 +45,7 @@ def __create_prediction_request__(image):
         tf.contrib.util.make_tensor_proto(image, dtype=tf.string))
 
     return request
+
 
 def __open_tf_server_channel__(server_name, server_port):
     '''
@@ -60,6 +62,7 @@ def __open_tf_server_channel__(server_name, server_port):
 
     return stub
 
+
 def __make_prediction_and_prepare_results__(stub, request):
     '''
     Sends Predict request over a channel stub to TensorFlow server
@@ -73,16 +76,23 @@ def __make_prediction_and_prepare_results__(stub, request):
     log.info("Result are: %s" % result)
     res = result.outputs['label/class']
     log.info("Resultat label/class: %s" % res)
+
+    keys = result.ouptuts.keys()
+    log.info("Resultat keys: %s" % keys)
+
     probs = res.float_val
     log.info("Probs label/class: %s" % probs)
+    # Probs label/class: [0.06039385870099068, 0.9343334436416626, 0.005272684618830681]
 
     value_dict = {idx: prob for idx, prob in enumerate(probs)}
     sorted_values = sorted(
         value_dict.items(),
         key=operator.itemgetter(1),
         reverse=True)
+    n_values = min([len(sorted_values), 5])
 
-    return sorted_values[0:3]
+    return sorted_values[0:n_values]
+
 
 def make_prediction(image):
     '''

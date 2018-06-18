@@ -9,7 +9,7 @@ RESTPLUS_VALIDATE = True
 RESTPLUS_MASK_SWAGGER = False
 RESTPLUS_ERROR_404_HELP = False
 
-# GAN client settings
+# Model client settings
 DEFAULT_TF_SERVER_NAME = '172.17.0.2'
 DEFAULT_TF_SERVER_PORT = 9000
 MODEL_NAME = 'keras_model'
