@@ -39,13 +39,15 @@ class GanPrediction(Resource):
             image_url = req_data['url']
             print("got url: %s" % image_url)
             with req.urlopen(image_url) as url:
-                image = io.BytesIO(url.read())
+                bytes = io.BytesIO(url.read())
+                image = bytes.getvalue()
+
         except Exception as inst:
             return {'message': 'something wrong with incoming request. ' +
                                'Original message: {}'.format(inst)}, 400
 
         try:
-            results = make_prediction(image.read())
+            results = make_prediction(image)
             results_json = [{'digit': res[0], 'probability': res[1]} for res in results]
             return {'prediction_result': results_json}, 200
 

@@ -35,7 +35,7 @@ def __create_prediction_request__(image):
     '''
     # create predict request
     request = predict_pb2.PredictRequest()
-    log.info("Image is: %s" % image)
+    log.info("Image is: %s" % image[0:50])
 
 
     try:
