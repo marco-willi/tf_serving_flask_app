@@ -69,8 +69,8 @@ def __make_prediction_and_prepare_results__(stub, request):
     :return: List of tuples, 3 most probable digits with their probabilities
     '''
     result = stub.Predict(request, 60.0)  # 60 secs timeout
-    log.info("Result outputs are: %s" result.outputs)
-    log.info("Result are: %s" result)
+    log.info("Result outputs are: %s" % result.outputs)
+    log.info("Result are: %s" % result)
     probs = result.outputs['scores'].float_val
     value_dict = {idx: prob for idx, prob in enumerate(probs)}
     sorted_values = sorted(
