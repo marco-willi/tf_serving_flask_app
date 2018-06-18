@@ -71,7 +71,11 @@ def __make_prediction_and_prepare_results__(stub, request):
     result = stub.Predict(request, 60.0)  # 60 secs timeout
     log.info("Result outputs are: %s" % result.outputs)
     log.info("Result are: %s" % result)
-    probs = result.outputs['scores'].float_val
+    res = result.outputs['label/class']
+    log.info("Resultat label/class: %s" % res)
+    probs = res.float_val
+    log.info("Probs label/class: %s" % probs)
+
     value_dict = {idx: prob for idx, prob in enumerate(probs)}
     sorted_values = sorted(
         value_dict.items(),
