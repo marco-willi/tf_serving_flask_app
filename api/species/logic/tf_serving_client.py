@@ -72,16 +72,9 @@ def __make_prediction_and_prepare_results__(stub, request):
     :return: List of tuples, 3 most probable digits with their probabilities
     '''
     result = stub.Predict(request, 60.0)  # 60 secs timeout
-    log.info("Result outputs are: %s" % result.outputs)
-    log.info("Result are: %s" % result)
-    res = result.outputs['label/class']
-    log.info("Result label/class: %s" % res)
 
-    keys = result.outputs.keys()
-    log.info("Result keys: %s" % list(keys))
-
+    res = result.outputs[settings.SPECIES_MODEL_OUTPUT_KEY]
     probs = res.float_val
-    log.info("Probs label/class: %s" % probs)
     # Probs label/class: [0.06039385870099068, 0.9343334436416626, 0.005272684618830681]
 
     value_dict = {idx: prob for idx, prob in enumerate(probs)}

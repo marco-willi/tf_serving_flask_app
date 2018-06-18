@@ -36,7 +36,6 @@ class CameraTrapPrediction(Resource):
 
         try:
             results = make_prediction(image)
-            print("results is: %s" % results)
             # results is: [(1, 0.9343334436416626), (0, 0.06039385870099068), (2, 0.005272684618830681)]
 
             results_json = [{'class': res[0], 'prob': res[1]} for res in results]
