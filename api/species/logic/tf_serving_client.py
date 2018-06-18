@@ -75,10 +75,10 @@ def __make_prediction_and_prepare_results__(stub, request):
     log.info("Result outputs are: %s" % result.outputs)
     log.info("Result are: %s" % result)
     res = result.outputs['label/class']
-    log.info("Resultat label/class: %s" % res)
+    log.info("Result label/class: %s" % res)
 
     keys = result.outputs.keys()
-    log.info("Resultat keys: %s" % keys)
+    log.info("Result keys: %s" % list(keys))
 
     probs = res.float_val
     log.info("Probs label/class: %s" % probs)

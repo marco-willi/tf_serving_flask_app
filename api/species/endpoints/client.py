@@ -8,7 +8,7 @@ from api.species.logic.tf_serving_client import make_prediction
 
 
 # create dedicated namespace for model client
-ns = api.namespace('model_client', description='Operations for Model client')
+ns = api.namespace('species_client', description='Operations for Model client')
 
 
 @ns.route('/prediction')

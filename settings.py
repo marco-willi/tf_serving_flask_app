@@ -12,6 +12,6 @@ RESTPLUS_ERROR_404_HELP = False
 # Species Model client settings
 DEFAULT_TF_SERVER_NAME = '172.17.0.2'
 DEFAULT_TF_SERVER_PORT = 9000
-SPECIES_MODEL_NAME = 'keras_model'
+SPECIES_MODEL_NAME = 'species_model'
 SPECIES_MODEL_SIGNATURE_NAME = 'serving_default'
 SPECIES_MODEL_INPUTS_KEY = 'image'
