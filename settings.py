@@ -9,9 +9,9 @@ RESTPLUS_VALIDATE = True
 RESTPLUS_MASK_SWAGGER = False
 RESTPLUS_ERROR_404_HELP = False
 
-# Model client settings
+# Species Model client settings
 DEFAULT_TF_SERVER_NAME = '172.17.0.2'
 DEFAULT_TF_SERVER_PORT = 9000
-MODEL_NAME = 'keras_model'
-MODEL_SIGNATURE_NAME = 'serving_default'
-MODEL_INPUTS_KEY = 'image'
+SPECIES_MODEL_NAME = 'keras_model'
+SPECIES_MODEL_SIGNATURE_NAME = 'serving_default'
+SPECIES_MODEL_INPUTS_KEY = 'image'

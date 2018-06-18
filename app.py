@@ -3,9 +3,8 @@ import logging.config
 import settings
 import utils
 from flask import Flask, Blueprint
-from flask_restplus import Resource, Api
 from api.restplus import api
-from api.gan.endpoints.client import ns as gan_client_namespace
+from api.species.endpoints.client import ns as species_client_namespace
 
 # create Flask application
 app = Flask(__name__)
@@ -29,6 +28,7 @@ def __get_flask_server_params__():
 
     return server_name, server_port, flask_debug
 
+
 def configure_app(flask_app, server_name, server_port):
     '''
     Configure Flask application
@@ -41,6 +41,7 @@ def configure_app(flask_app, server_name, server_port):
     flask_app.config['RESTPLUS_MASK_SWAGGER'] = settings.RESTPLUS_MASK_SWAGGER
     flask_app.config['ERROR_404_HELP'] = settings.RESTPLUS_ERROR_404_HELP
 
+
 def initialize_app(flask_app, server_name, server_port):
     '''
     Initialize Flask application with Flask-RestPlus
@@ -51,7 +52,7 @@ def initialize_app(flask_app, server_name, server_port):
 
     configure_app(flask_app, server_name, server_port)
     api.init_app(blueprint)
-    api.add_namespace(gan_client_namespace)
+    api.add_namespace(species_client_namespace)
 
     flask_app.register_blueprint(blueprint)
 
@@ -63,6 +64,7 @@ def main():
         '>>>>> Starting TF Serving client at http://{}/ >>>>>'.format(app.config['SERVER_NAME'])
         )
     app.run(debug=flask_debug, host=server_name)
+
 
 if __name__ == '__main__':
     main()
