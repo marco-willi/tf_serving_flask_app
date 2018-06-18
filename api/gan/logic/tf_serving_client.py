@@ -40,38 +40,38 @@ def __create_prediction_request__(image):
 
     try:
         tp = tf.contrib.util.make_tensor_proto([image], dtype=tf.string, shape=[1])
-        log.info("Tensor proto is: %s" % tp)
+        log.info("Tensor proto is: %s" % tp[0:50])
     except:
         pass
 
     try:
         tp = tf.contrib.util.make_tensor_proto([image], dtype=tf.string, shape=[0])
-        log.info("Tensor proto2 is: %s" % tp)
+        log.info("Tensor proto2 is: %s" % tp[0:50])
     except:
         pass
 
     try:
         tp = tf.contrib.util.make_tensor_proto(image, dtype=tf.string, shape=[0])
-        log.info("Tensor proto3 is: %s" % tp)
+        log.info("Tensor proto3 is: %s" % tp[0:50])
     except:
         pass
 
     try:
         tp = tf.contrib.util.make_tensor_proto(image, dtype=tf.string, shape=[1])
-        log.info("Tensor proto4 is: %s" % tp)
+        log.info("Tensor proto4 is: %s" % tp[0:50])
     except:
         pass
 
 
     try:
         tp = tf.contrib.util.make_tensor_proto(image, dtype=tf.string)
-        log.info("Tensor proto5 is: %s" % tp)
+        log.info("Tensor proto5 is: %s" % tp[0:50])
     except:
         pass
 
     try:
         tp = tf.contrib.util.make_tensor_proto([image], dtype=tf.string)
-        log.info("Tensor proto6 is: %s" % tp)
+        log.info("Tensor proto6 is: %s" % tp[0:50])
     except:
         pass
 
@@ -79,7 +79,7 @@ def __create_prediction_request__(image):
     request.model_spec.name = settings.MODEL_NAME
     request.model_spec.signature_name = settings.MODEL_SIGNATURE_NAME
     request.inputs[settings.MODEL_INPUTS_KEY].CopyFrom(
-        tf.contrib.util.make_tensor_proto([image], dtype=tf.string, shape=[1]))
+        tf.contrib.util.make_tensor_proto([image], dtype=tf.string))
 
     return request
 
