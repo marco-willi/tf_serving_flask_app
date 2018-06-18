@@ -40,7 +40,7 @@ def __create_prediction_request__(image):
     request.model_spec.name = settings.MODEL_NAME
     request.model_spec.signature_name = settings.MODEL_SIGNATURE_NAME
     request.inputs[settings.MODEL_INPUTS_KEY].CopyFrom(
-        tf.contrib.util.make_tensor_proto(image, shape=[1]))
+        tf.contrib.util.make_tensor_proto(image))
 
     return request
 
