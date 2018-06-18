@@ -35,9 +35,9 @@ class GanPrediction(Resource):
     def post(self):
         try:
             req_data = request.get_json()
-            print("got req_data: %s" req_data)
+            print("got req_data: %s" % req_data)
             image_url = req_data['url']
-            print("got url: %s" image_url)
+            print("got url: %s" % image_url)
             with req.urlopen(image_url) as url:
                 image = io.BytesIO(url.read())
         except Exception as inst:
