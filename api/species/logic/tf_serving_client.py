@@ -83,24 +83,26 @@ def __make_prediction_and_prepare_results__(stub, request):
     shape = res.tensor_shape
     print("Shape is: %s" % shape)
 
-    dim = shape.dim
-    print("Dim is %s" % dim)
+    result_dims = shape.dim
+    # result_dims is [size: 2 , size: 3], access like a list
 
-    print("Dim 0 is %s" % dim[0])
-
-    print("Type of res is: %s" % type(res))
-
-
+    n_results = result_dims[0]
     # Probs label/class: [0.06039385870099068, 0.9343334436416626, 0.005272684618830681]
 
-    value_dict = {idx: prob for idx, prob in enumerate(probs)}
-    sorted_values = sorted(
-        value_dict.items(),
-        key=operator.itemgetter(1),
-        reverse=True)
-    n_values = min([len(sorted_values), 5])
+    # Extract results for each record and return as list
+    results_final = []
+    for i in range(0, n_results):
+        # get probs for this result
+        record_probs = probs[]
+        value_dict = {idx: prob for idx, prob in enumerate(record_probs)}
+        sorted_values = sorted(
+            value_dict.items(),
+            key=operator.itemgetter(1),
+            reverse=True)
+        n_values = min([len(sorted_values), 5])
+        results_final.append(sorted_values[0:n_values])
 
-    return sorted_values[0:n_values]
+    return results_final
 
 
 def make_prediction(image):

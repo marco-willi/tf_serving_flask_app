@@ -41,9 +41,13 @@ class CameraTrapPrediction(Resource):
             results = make_prediction(image_byte_list)
             print("Results Are %s: " % results)
             # results is: [(1, 0.9343334436416626), (0, 0.06039385870099068), (2, 0.005272684618830681)]
-
-            results_json = [{'class': res[0], 'prob': res[1]} for res in results]
-            return {'prediction_result': results_json}, 200
+            # [[(1, 0.9343334436416626), (0, 0.06039385870099068), (2, 0.005272684618830681)],
+            #  [(1, 0.9343334436416626), (0, 0.06039385870099068), (2, 0.005272684618830681)]]
+            results_json_list = []
+            for i in range(0, len(results)):
+                results_json = [{'class': res[0], 'prob': res[1]} for res in results[i]]
+                results_json_list.append(results_json)
+            return {'prediction_result': results_json_list}, 200
 
         except Exception as inst:
             return {'message': 'internal error: {}'.format(inst)}, 500
