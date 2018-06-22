@@ -91,8 +91,11 @@ def __make_prediction_and_prepare_results__(stub, request):
     print("n_results type: %s" % type(n_results))
     print("n_results is: %s" % n_results)
     print("results size is: %s" % result_size)
-    n_results = int(n_results)
-    result_size = int(n_results)
+    n_results = n_results.size
+    result_size = n_results.size
+    print("n_results is: %s" % n_results)
+    print("results size is: %s" % result_size)
+
     # Probs label/class: [0.06039385870099068, 0.9343334436416626, 0.005272684618830681]
 
     # Extract results for each record and return as list
