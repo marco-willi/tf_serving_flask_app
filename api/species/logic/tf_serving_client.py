@@ -80,10 +80,10 @@ def __make_prediction_and_prepare_results__(stub, request):
     probs = res.float_val
     print("Probs are: %s" % probs)
 
-    print("res keys are: %s" % list(res.keys))
-
     shape = res.tensor_shape
     print("Shape is: %s" % shape)
+
+    print("Type of res is: %s" % type(res))
 
 
     # Probs label/class: [0.06039385870099068, 0.9343334436416626, 0.005272684618830681]
