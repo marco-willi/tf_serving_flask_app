@@ -83,6 +83,11 @@ def __make_prediction_and_prepare_results__(stub, request):
     shape = res.tensor_shape
     print("Shape is: %s" % shape)
 
+    dim = shape.dim
+    print("Dim is %s" % dim)
+
+    print("Dim 0 is %s" % dim[0])
+
     print("Type of res is: %s" % type(res))
 
 
