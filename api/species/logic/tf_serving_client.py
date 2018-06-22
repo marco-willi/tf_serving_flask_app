@@ -98,7 +98,7 @@ def __make_prediction_and_prepare_results__(stub, request):
     try:
         n_results = n_results.size
         print("n_results is: %s" % n_results)
-        result_size = n_results.size
+        result_size = result_size.size
         print("results size is: %s" % result_size)
     except:
         pass
