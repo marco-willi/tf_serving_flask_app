@@ -39,7 +39,7 @@ class CameraTrapPrediction(Resource):
 
         try:
             results = make_prediction(image_byte_list)
-            print("Results Are %s: " % results)
+            # print("Results Are %s: " % results)
             # results is: [(1, 0.9343334436416626), (0, 0.06039385870099068), (2, 0.005272684618830681)]
             # [[(1, 0.9343334436416626), (0, 0.06039385870099068), (2, 0.005272684618830681)],
             #  [(1, 0.9343334436416626), (0, 0.06039385870099068), (2, 0.005272684618830681)]]

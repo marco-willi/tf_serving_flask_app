@@ -72,48 +72,22 @@ def __make_prediction_and_prepare_results__(stub, request):
     :return: List of tuples, 3 most probable digits with their probabilities
     '''
     result = stub.Predict(request, 60.0)  # 60 secs timeout
-    print("Result is %s" % result)
-    print("Result outputs are %s" % result.outputs)
+    #print("Result is %s" % result)
+    #print("Result outputs are %s" % result.outputs)
 
     res = result.outputs[settings.SPECIES_MODEL_OUTPUT_KEY]
-    print("res is %s" % res)
+    # print("res is %s" % res)
     probs = res.float_val
-    print("Probs are: %s" % probs)
+    #print("Probs are: %s" % probs)
 
     shape = res.tensor_shape
-    print("Shape is: %s" % shape)
+    #print("Shape is: %s" % shape)
 
     result_dims = shape.dim
     # result_dims is [size: 2 , size: 3], access like a list
 
-    try:
-        print("Result_dims: %s" % result_dims)
-    except:
-        pass
-    n_results = result_dims[0]
-    result_size = result_dims[1]
-    print("n_results type: %s" % type(n_results))
-    print("n_results is: %s" % n_results)
-    print("results size is: %s" % result_size)
-    try:
-        n_results = n_results.size
-        print("n_results is: %s" % n_results)
-        result_size = result_size.size
-        print("results size is: %s" % result_size)
-    except:
-        pass
-
-    try:
-        print("shape.dim.size: %s" % shape.dim.size)
-        print("shape.dim.size type: %s" % type(shape.dim.size))
-    except:
-        pass
-
-    try:
-        print("shape.dim.size[0]: %s" % int(shape.dim.size[0]))
-    except:
-        pass
-
+    n_results = result_dims[0].size
+    result_size = result_dims[1].size
 
 
     # Probs label/class: [0.06039385870099068, 0.9343334436416626, 0.005272684618830681]
