@@ -87,13 +87,18 @@ def __make_prediction_and_prepare_results__(stub, request):
     # result_dims is [size: 2 , size: 3], access like a list
 
     n_results = result_dims[0]
+    result_size = result_dims[1]
     # Probs label/class: [0.06039385870099068, 0.9343334436416626, 0.005272684618830681]
 
     # Extract results for each record and return as list
     results_final = []
     for i in range(0, n_results):
+
         # get probs for this result
-        record_probs = probs[]
+        start_idx = i*result_size
+        end_idx = start_idx+result_size
+        record_probs = probs[start_idx:end_idx]
+
         value_dict = {idx: prob for idx, prob in enumerate(record_probs)}
         sorted_values = sorted(
             value_dict.items(),
