@@ -79,6 +79,13 @@ def __make_prediction_and_prepare_results__(stub, request):
     print("res is %s" % res)
     probs = res.float_val
     print("Probs are: %s" % probs)
+
+    print("res keys are: %s" % list(res.keys))
+
+    shape = res.tensor_shape
+    print("Shape is: %s" % shape)
+
+
     # Probs label/class: [0.06039385870099068, 0.9343334436416626, 0.005272684618830681]
 
     value_dict = {idx: prob for idx, prob in enumerate(probs)}
