@@ -86,15 +86,35 @@ def __make_prediction_and_prepare_results__(stub, request):
     result_dims = shape.dim
     # result_dims is [size: 2 , size: 3], access like a list
 
+    try:
+        print("Result_dims: %s" % result_dims)
+    except:
+        pass
     n_results = result_dims[0]
     result_size = result_dims[1]
     print("n_results type: %s" % type(n_results))
     print("n_results is: %s" % n_results)
     print("results size is: %s" % result_size)
-    n_results = n_results.size
-    result_size = n_results.size
-    print("n_results is: %s" % n_results)
-    print("results size is: %s" % result_size)
+    try:
+        n_results = n_results.size
+        print("n_results is: %s" % n_results)
+        result_size = n_results.size
+        print("results size is: %s" % result_size)
+    except:
+        pass
+
+    try:
+        print("shape.dim.size: %s" % shape.dim.size)
+        print("shape.dim.size type: %s" % type(shape.dim.size))
+    except:
+        pass
+
+    try:
+        print("shape.dim.size[0]: %s" % int(shape.dim.size[0]))
+    except:
+        pass
+
+
 
     # Probs label/class: [0.06039385870099068, 0.9343334436416626, 0.005272684618830681]
 
